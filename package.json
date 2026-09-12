@@ -2,7 +2,6 @@
   "name": "create-express",
   "version": "1.0.0",
   "description": "CLI tool to scaffold production-ready Express.js backend projects",
-  "main": "src/index.js",
   "bin": {
     "create-express": "./bin/index.js"
   },
@@ -20,7 +19,22 @@
     "rest",
     "nodejs"
   ],
-  "author": "",
+  "author": "Saurabh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Code-with-saurabh/create-express.git"
+  },
+  "homepage": "https://github.com/Code-with-saurabh/create-express#readme",
+  "bugs": {
+    "url": "https://github.com/Code-with-saurabh/create-express/issues"
+  },
+  "files": [
+    "bin",
+    "src",
+    "templates",
+    "LICENSE",
+    "README.md"
+  ],
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
