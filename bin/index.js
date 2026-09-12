@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const pkg = require('../package.json');
 
 program
-  .name('create-express')
+  .name('create-express-code')
   .description('Scaffold a production-ready Express.js backend project')
   .version(pkg.version)
   .argument('[project-name]', 'Project name')
