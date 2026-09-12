@@ -9,7 +9,7 @@ const { installDependencies, initGit } = require('./installer');
 async function run(projectName, options) {
   console.log('');
   console.log(chalk.bold.cyan('  ╔══════════════════════════════════════╗'));
-  console.log(chalk.bold.cyan('  ║     create-express v1.0.0            ║'));
+  console.log(chalk.bold.cyan('  ║     create-express-code v1.0.0     ║'));
   console.log(chalk.bold.cyan('  ║  Production-ready Express.js API     ║'));
   console.log(chalk.bold.cyan('  ╚══════════════════════════════════════╝'));
   console.log('');
