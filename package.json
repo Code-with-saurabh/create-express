@@ -1,0 +1,37 @@
+{
+  "name": "create-express",
+  "version": "1.0.0",
+  "description": "CLI tool to scaffold production-ready Express.js backend projects",
+  "main": "src/index.js",
+  "bin": {
+    "create-express": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "node bin/index.js",
+    "test": "node test/index.test.js"
+  },
+  "keywords": [
+    "express",
+    "scaffold",
+    "cli",
+    "boilerplate",
+    "backend",
+    "api",
+    "rest",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "fs-extra": "^11.2.0",
+    "handlebars": "^4.7.8",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
+    "validate-npm-package-name": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

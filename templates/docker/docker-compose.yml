@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      {{#if (eq database "mongodb")}}
+      - MONGO_URI=mongodb://mongo:27017/myapp
+      {{/if}}
+      {{#if (eq database "postgresql")}}
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/mydb
+      {{/if}}
+      {{#if (eq database "mysql")}}
+      - DATABASE_URL=mysql://root:password@mysql:3306/mydb
+      {{/if}}
+    depends_on:
+      {{#if (eq database "mongodb")}}
+      - mongo
+      {{/if}}
+      {{#if (eq database "postgresql")}}
+      - postgres
+      {{/if}}
+      {{#if (eq database "mysql")}}
+      - mysql
+      {{/if}}
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  {{#if (eq database "mongodb")}}
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+    networks:
+      - app-network
+  {{/if}}
+
+  {{#if (eq database "postgresql")}}
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - app-network
+  {{/if}}
+
+  {{#if (eq database "mysql")}}
+  mysql:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydb
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - app-network
+  {{/if}}
+
+volumes:
+  {{#if (eq database "mongodb")}}
+  mongo-data:
+  {{/if}}
+  {{#if (eq database "postgresql")}}
+  postgres-data:
+  {{/if}}
+  {{#if (eq database "mysql")}}
+  mysql-data:
+  {{/if}}
+
+networks:
+  app-network:
+    driver: bridge
