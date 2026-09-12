@@ -218,6 +218,7 @@ async function generatePackageJson(config, targetDir, ext) {
     devDependencies: {
       nodemon: '^3.0.2',
       eslint: '^8.56.0',
+      'pino-pretty': '^10.3.1',
     },
   };
 
