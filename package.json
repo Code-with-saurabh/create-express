@@ -1,6 +1,6 @@
 {
   "name": "create-express-code",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "CLI tool to scaffold production-ready Express.js backend projects",
   "bin": {
     "create-express-code": "bin/index.js"
