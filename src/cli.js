@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const ora = require('ora');
+const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs-extra');
 const { promptUser } = require('./prompts');
@@ -29,9 +30,30 @@ async function run(projectName, options) {
     await generateProject(config, targetDir);
     spinner.succeed(chalk.green('Project files created successfully'));
 
-    const installSpinner = ora('Installing dependencies...').start();
-    await installDependencies(targetDir, config.packageManager);
-    installSpinner.succeed(chalk.green('Dependencies installed'));
+    if (options.yes) {
+      const installSpinner = ora('Installing dependencies...').start();
+      await installDependencies(targetDir, config.packageManager);
+      installSpinner.succeed(chalk.green('Dependencies installed'));
+    } else {
+      const { installNow } = await inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'installNow',
+          message: 'Do you want to install dependencies now?',
+          default: true,
+        },
+      ]);
+
+      if (installNow) {
+        const installSpinner = ora('Installing dependencies...').start();
+        await installDependencies(targetDir, config.packageManager);
+        installSpinner.succeed(chalk.green('Dependencies installed'));
+      } else {
+        console.log(chalk.yellow(`\n  Skipping dependencies. Install later with:`));
+        console.log(chalk.cyan(`    cd ${config.projectName} && npm install`));
+        console.log('');
+      }
+    }
 
     const gitSpinner = ora('Initializing git repository...').start();
     await initGit(targetDir);
